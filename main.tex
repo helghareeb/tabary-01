@@ -1,0 +1,84 @@
+\documentclass[12pt]{book}
+
+% ====== الحزم الأساسية ======
+\usepackage{fontspec}
+\usepackage{polyglossia}
+\setmainlanguage{arabic}
+
+% ====== الخطوط ======
+\newfontfamily\arabicfont[Script=Arabic, Numerals=Arabic]{Amiri} % إضافة الأرقام العربية
+\newfontfamily\quranfont[Script=Arabic,Scale=1.3]{Amiri}
+
+% ====== تنسيق الصفحة ======
+\usepackage[a4paper,margin=2.5cm]{geometry}
+\usepackage{setspace}
+\onehalfspacing
+
+% ====== ترويسة وتذييل الصفحة (Headers & Footers) ======
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{} % مسح التنسيق الافتراضي
+\fancyhead[RO]{\nouppercase{\rightmark}} % اسم الفصل على اليمين
+\fancyhead[LE]{\nouppercase{\leftmark}} % اسم القسم على اليسار
+\fancyfoot[C]{\thepage} % رقم الصفحة في المنتصف
+\renewcommand{\headrulewidth}{0.4pt} % خط أفقي تحت الترويسة
+
+% ====== إعدادات الفقرات ======
+\setlength{\parskip}{0.5em} % مسافة بين الفقرات
+\setlength{\parindent}{1.5em} % مسافة بادئة أول السطر
+
+% ====== الحواشي ======
+\usepackage{footnote}
+\makesavenoteenv{longtable}
+
+% ====== خط فاصل زخرفي ======
+\newcommand{\separator}{
+    \vspace{1em}
+    \begin{center}
+        $\ast$ \quad $\ast$ \quad $\ast$
+    \end{center}
+    \vspace{1em}
+}
+
+% ====== بيئة الآيات ======
+\newenvironment{ayah}
+{\begin{center}\quranfont\large}
+{\end{center}}
+
+% ====== بيئة الحديث ======
+\newenvironment{hadith}
+{\begin{quote}\itshape}
+{\end{quote}}
+
+% ====== تمييز الإسناد ======
+\newcommand{\isnad}[1]{\textbf{#1}}
+
+% ====== تمييز الراوي ======
+\newcommand{\rawi}[1]{\textcolor{blue}{#1}}
+
+\usepackage{xcolor}
+
+% ====== الروابط والفهرس ======
+\usepackage[colorlinks=true, linkcolor=blue, urlcolor=blue, citecolor=blue]{hyperref}
+
+% ====== بيانات الغلاف ======
+\title{\vspace{3cm}\Huge \textbf{تفريغ دروس تفسير الطبري} \\ \vspace{0.5cm} \Large دورة دراسة تراث الأئمة المحققين}
+\author{\Large لفضيلة الشيخ: حسين بن عبدالرازق المصري \vspace{1cm} \\ \large تنسيق واعتناء: [اكتب اسمك هنا]}
+\date{\vspace{1cm} \large إعداد: \today}
+
+% ====== بداية المستند ======
+\begin{document}
+
+\frontmatter % ترقيم أبجدي (أ، ب، ج) للغلاف والفهرس
+\maketitle % توليد صفحة الغلاف
+
+\tableofcontents % توليد الفهرس
+\newpage % بدء المحتوى في صفحة جديدة
+
+\mainmatter % بدء الترقيم الفعلي (١، ٢، ٣) من بداية الدروس
+
+% استدعاء ملفات الدروس من مجلد src
+% يتم تجميع الكتاب هنا ليكون منظماً وسهل التعديل
+\input{src/001.tex}
+
+\end{document}

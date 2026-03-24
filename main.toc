@@ -1,0 +1,11 @@
+\xpg@aux {}{arabic}
+\contentsline {chapter}{\numberline {\LRE {١}}اللقاء الأول: مقدمة في دراسة تفسير الطبري}{\LRE {١}}{chapter.1}%
+\contentsline {section}{\numberline {\LRE {١}.\LRE {١}}كيف نعرف أئمة كل باب؟}{\LRE {٩}}{section.1.1}%
+\contentsline {section}{\numberline {\LRE {١}.\LRE {٢}}أهمية دراسة سير الأئمة}{\LRE {١٠}}{section.1.2}%
+\contentsline {subsection}{\numberline {\LRE {١}.\LRE {٢}.\LRE {١}}ما الذي نعتني به عند دراسة سير الأئمة؟}{\LRE {١٠}}{subsection.1.2.1}%
+\contentsline {section}{\numberline {\LRE {١}.\LRE {٣}}التأهب لقراءة تفسير الطبري والمطولات}{\LRE {١٠}}{section.1.3}%
+\contentsline {subsection}{\numberline {\LRE {١}.\LRE {٣}.\LRE {١}}خطورة الدخول في المطولات دون مقدمات}{\LRE {١١}}{subsection.1.3.1}%
+\contentsline {subsection}{\numberline {\LRE {١}.\LRE {٣}.\LRE {٢}}أهمية المقدمات التأهيلية}{\LRE {١١}}{subsection.1.3.2}%
+\contentsline {subsection}{\numberline {\LRE {١}.\LRE {٣}.\LRE {٣}}الكتب المقترحة للتأهب قبل قراءة الطبري}{\LRE {١١}}{subsection.1.3.3}%
+\contentsline {section}{\numberline {\LRE {١}.\LRE {٤}}عناوين الفوائد المستخرجة من تفسير الطبري}{\LRE {١٣}}{section.1.4}%
+\contentsline {section}{\numberline {\LRE {١}.\LRE {٥}}خطة البدء في قراءة الكتاب وخاتمة اللقاء}{\LRE {١٤}}{section.1.5}%
