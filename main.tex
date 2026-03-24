@@ -57,6 +57,17 @@
 \newcommand{\rawi}[1]{\textcolor{blue}{#1}}
 
 \usepackage{xcolor}
+\usepackage{tcolorbox}
+
+% ====== بيئة الفوائد ======
+\newtcolorbox{fawaid}[1][فوائد مستنبطة]{
+    colback=gray!5, % لون الخلفية فاتح جداً
+    colframe=black!70, % لون الإطار
+    fonttitle=\bfseries\large, % خط العنوان
+    title={#1}, % إمكانية تغيير العنوان
+    arc=3mm, % زوايا دائرية
+    boxrule=1pt, % سمك الخط
+}
 
 % ====== الروابط والفهرس ======
 \usepackage[colorlinks=true, linkcolor=blue, urlcolor=blue, citecolor=blue]{hyperref}
@@ -80,5 +91,6 @@
 % استدعاء ملفات الدروس من مجلد src
 % يتم تجميع الكتاب هنا ليكون منظماً وسهل التعديل
 \input{src/001.tex}
+%\input{src/002.tex} % سيتم تفعيل هذا السطر وإزالة علامة % عند البدء في الدرس الثاني
 
 \end{document}
