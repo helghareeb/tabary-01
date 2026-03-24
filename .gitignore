@@ -1,0 +1,18 @@
+# LaTeX compilation files
+*.aux
+*.bbl
+*.blg
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.synctex.gz
+*.toc
+*.lof
+*.lot
+*.idx
+*.ind
+*.ilg
+
+# OS generated files
+.DS_Store
