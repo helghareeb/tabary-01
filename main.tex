@@ -12,9 +12,10 @@
 % ====== تنسيق الصفحة ======
 \usepackage[a4paper,margin=2.5cm]{geometry}
 \usepackage{setspace}
-\usepackage{tikz} % حزمة رسم الإطارات والزخارف
-\usetikzlibrary{calc}
 \onehalfspacing
+
+% لمنع خروج النص العربي عن حدود الصفحة (Overfull hbox)
+\emergencystretch=3em
 
 % ====== ترويسة وتذييل الصفحة (Headers & Footers) ======
 \usepackage{fancyhdr}
@@ -106,10 +107,12 @@
 % ====== بيئة الفوائد ======
 \newcounter{fawaidcounter}
 \newenvironment{fawaid}[1][فوائد مستنبطة]{%
-    \par\vspace{1em}\noindent
+    \par\vspace{1em}
     \refstepcounter{fawaidcounter}%
-    \textbf{فائدة (\arabic{fawaidcounter}) - #1:}\par\nopagebreak\vspace{0.5em}\noindent
+    \noindent\textcolor{blue!70!black}{\large\textbf{فائدة (\arabic{fawaidcounter}) - #1:}}\par\nopagebreak\vspace{0.3em}
+    \begin{quote}
 }{%
+    \end{quote}
     \par\vspace{1em}
 }
 
@@ -125,14 +128,6 @@
 
 % ====== صفحة الغلاف المزخرفة ======
 \begin{titlepage}
-    \begin{tikzpicture}[remember picture,overlay]
-        % الإطار الخارجي السميك
-        \draw[line width=3pt, color=black!70] 
-            ($(current page.north west) + (1.5cm,-1.5cm)$) rectangle ($(current page.south east) + (-1.5cm,1.5cm)$);
-        % الإطار الداخلي الرفيع
-        \draw[line width=1pt, color=black!70] 
-            ($(current page.north west) + (1.65cm,-1.65cm)$) rectangle ($(current page.south east) + (-1.65cm,1.65cm)$);
-    \end{tikzpicture}
     \begin{center}
         \vspace*{4cm}
         {\Huge\bfseries تفريغ دروس تفسير الطبري\par}
@@ -162,6 +157,17 @@
 \input{src/006.tex}
 \input{src/007.tex}
 \input{src/008.tex}
+\input{src/009.tex}
+\input{src/010.tex}
+\input{src/011.tex}
+\input{src/012.tex}
+\input{src/013.tex}
+\input{src/014.tex}
+\input{src/015.tex}
+\input{src/016.tex}
+\input{src/017.tex}
+\input{src/018.tex}
+\input{src/019.tex}
 
 % ====== الملاحق ======
 % إعادة تعريف ترويسة الصفحات للملاحق
