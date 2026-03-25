@@ -6,12 +6,14 @@
 \setmainlanguage{arabic}
 
 % ====== الخطوط ======
-\newfontfamily\arabicfont[Script=Arabic, Numerals=Arabic]{Lateef} % إضافة الأرقام العربية
+\newfontfamily\arabicfont[Script=Arabic, Numerals=Arabic]{Amiri} % إضافة الأرقام العربية
 \newfontfamily\quranfont[Script=Arabic,Scale=1.3]{Amiri}
 
 % ====== تنسيق الصفحة ======
 \usepackage[a4paper,margin=2.5cm]{geometry}
 \usepackage{setspace}
+\usepackage{tikz} % حزمة رسم الإطارات والزخارف
+\usetikzlibrary{calc}
 \onehalfspacing
 
 % ====== ترويسة وتذييل الصفحة (Headers & Footers) ======
@@ -85,47 +87,65 @@
 }
 
 % ====== بيئة الحديث ======
-\NewEnviron{hadith}{%
+% نقوم بتعديل بيئة الحديث لتقبل مدخلاً اختيارياً للفهرس، لحل مشكلة الفهارس المتداخلة
+\NewEnviron{hadith}[1][]{%
+    \if\relax\detokenize{#1}\relax\else\index[hadith]{#1}\fi%
     \begin{quote}\itshape\BODY\end{quote}%
-    \index[hadith]{\BODY}%
 }
 
 % ====== تمييز الإسناد ======
 \newcommand{\isnad}[1]{\textbf{#1}}
 
 % ====== تمييز الراوي ======
-\renewcommand{\rawi}[1]{%
+\newcommand{\rawi}[1]{%
     \textcolor{blue}{#1}\index[alam]{#1}%
 }
 
 \usepackage{xcolor}
-\usepackage{tcolorbox}
 
 % ====== بيئة الفوائد ======
-\newtcolorbox{fawaid}[1][فوائد مستنبطة]{
-    colback=gray!5, % لون الخلفية فاتح جداً
-    colframe=black!70, % لون الإطار
-    fonttitle=\bfseries\large, % خط العنوان
-    title={#1}, % إمكانية تغيير العنوان
-    arc=3mm, % زوايا دائرية
-    boxrule=1pt, % سمك الخط
+\newcounter{fawaidcounter}
+\newenvironment{fawaid}[1][فوائد مستنبطة]{%
+    \par\vspace{1em}\noindent
+    \refstepcounter{fawaidcounter}%
+    \textbf{فائدة (\arabic{fawaidcounter}) - #1:}\par\nopagebreak\vspace{0.5em}\noindent
+}{%
+    \par\vspace{1em}
 }
 
 % ====== الروابط والفهرس ======
 \usepackage[nottoc]{tocbibind} % تضمين الملاحق والقوائم في الفهرس تلقائياً
 \usepackage[colorlinks=true, linkcolor=blue, urlcolor=blue, citecolor=blue]{hyperref}
 
-% ====== بيانات الغلاف ======
-\title{\vspace{3cm}\Huge \textbf{تفريغ دروس تفسير الطبري} \\ \vspace{0.5cm} \Large دورة دراسة تراث الأئمة المحققين}
-\author{\Large لفضيلة الشيخ: حسين بن عبدالرازق المصري \vspace{1cm} \\ \large تنسيق واعتناء: [اكتب اسمك هنا]}
-\date{\vspace{1cm} \large إعداد: \today}
-
 % ====== بداية المستند ======
 \begin{document}
 
 \frontmatter % بداية الأجزاء التمهيدية (الغلاف والفهرس)
 \pagenumbering{arabic} % استخدام الأرقام العربية لترقيم الصفحات التمهيدية
-\maketitle % توليد صفحة الغلاف
+
+% ====== صفحة الغلاف المزخرفة ======
+\begin{titlepage}
+    \begin{tikzpicture}[remember picture,overlay]
+        % الإطار الخارجي السميك
+        \draw[line width=3pt, color=black!70] 
+            ($(current page.north west) + (1.5cm,-1.5cm)$) rectangle ($(current page.south east) + (-1.5cm,1.5cm)$);
+        % الإطار الداخلي الرفيع
+        \draw[line width=1pt, color=black!70] 
+            ($(current page.north west) + (1.65cm,-1.65cm)$) rectangle ($(current page.south east) + (-1.65cm,1.65cm)$);
+    \end{tikzpicture}
+    \begin{center}
+        \vspace*{4cm}
+        {\Huge\bfseries تفريغ دروس تفسير الطبري\par}
+        \vspace{1cm}
+        {\Large دورة دراسة تراث الأئمة المحققين\par}
+        \vspace{3cm}
+        {\Large لفضيلة الشيخ: حسين بن عبدالرازق المصري\par}
+        \vspace{2cm}
+        {\large تنسيق واعتناء: [اكتب اسمك هنا]\par}
+        \vfill
+        {\large إعداد: \today\par}
+    \end{center}
+\end{titlepage}
 
 \tableofcontents % توليد الفهرس
 \newpage % بدء المحتوى في صفحة جديدة
@@ -141,6 +161,7 @@
 \input{src/005.tex}
 \input{src/006.tex}
 \input{src/007.tex}
+\input{src/008.tex}
 
 % ====== الملاحق ======
 % إعادة تعريف ترويسة الصفحات للملاحق
