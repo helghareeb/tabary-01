@@ -1,4 +1,4 @@
-\documentclass[12pt]{book}
+\documentclass[14pt]{book}
 
 % ====== الحزم الأساسية ======
 \usepackage{fontspec}
@@ -6,7 +6,7 @@
 \setmainlanguage{arabic}
 
 % ====== الخطوط ======
-\newfontfamily\arabicfont[Script=Arabic, Numerals=Arabic]{Amiri} % إضافة الأرقام العربية
+\newfontfamily\arabicfont[Script=Arabic, Numerals=Arabic]{Lateef} % إضافة الأرقام العربية
 \newfontfamily\quranfont[Script=Arabic,Scale=1.3]{Amiri}
 
 % ====== تنسيق الصفحة ======
@@ -22,6 +22,37 @@
 \fancyhead[LE]{\nouppercase{\leftmark}} % اسم القسم على اليسار
 \fancyfoot[C]{\thepage} % رقم الصفحة في المنتصف
 \renewcommand{\headrulewidth}{0.4pt} % خط أفقي تحت الترويسة
+
+% ====== تنسيق العناوين (Chapters & Sections) ======
+\usepackage{titlesec}
+\titleformat{\chapter}[display]
+  {\normalfont\Huge\bfseries\centering} % التنسيق: حجم ضخم، ثقيل، وتوسيط
+  {\chaptertitlename\ \thechapter}      % النص الذي يسبق العنوان (مثال: الفصل ١)
+  {20pt}                               % المسافة العمودية بين الرقم والعنوان
+  {}
+
+% ====== تنسيق الفهرس ======
+\usepackage{titletoc}
+\titlecontents{chapter}
+  [2.5em] % المسافة البادئة
+  {\vspace{1em}\large\bfseries} % تنسيق الخط للفصل
+  {\contentslabel{2.5em}} % عرض مساحة الرقم
+  {\hspace*{-2.5em}} % الإزاحة في حال عدم وجود رقم
+  {\hfill\contentspage} % حشو السطر ورقم الصفحة بدون نقاط
+
+\titlecontents{section}
+  [5.5em] % المسافة البادئة للقسم (2.5 + 3.0)
+  {\vspace{0.2em}}
+  {\contentslabel{3em}} % عرض مساحة الرقم
+  {\hspace*{-3em}}
+  {\titlerule*[0.5pc]{.}\contentspage} % نقاط تصل لرقم الصفحة
+
+\titlecontents{subsection}
+  [9em] % المسافة البادئة للقسم الفرعي (5.5 + 3.5)
+  {\vspace{0.1em}}
+  {\contentslabel{3.5em}} % عرض مساحة الرقم
+  {\hspace*{-3.5em}}
+  {\titlerule*[0.5pc]{.}\contentspage}
 
 % ====== إعدادات الفقرات ======
 \setlength{\parskip}{0.5em} % مسافة بين الفقرات
@@ -40,21 +71,32 @@
     \vspace{1em}
 }
 
+% ====== الفهارس الفنية (آيات، أحاديث) ======
+\usepackage{imakeidx}
+\usepackage{environ}
+\makeindex[name=ayah, title=فهرس الآيات القرآنية, intoc]
+\makeindex[name=hadith, title=فهرس الأحاديث النبوية, intoc]
+\makeindex[name=alam, title=فهرس الأعلام والرواة, intoc]
+
 % ====== بيئة الآيات ======
-\newenvironment{ayah}
-{\begin{center}\quranfont\large}
-{\end{center}}
+\NewEnviron{ayah}{%
+    \begin{center}\quranfont\large\BODY\end{center}%
+    \index[ayah]{\BODY}%
+}
 
 % ====== بيئة الحديث ======
-\newenvironment{hadith}
-{\begin{quote}\itshape}
-{\end{quote}}
+\NewEnviron{hadith}{%
+    \begin{quote}\itshape\BODY\end{quote}%
+    \index[hadith]{\BODY}%
+}
 
 % ====== تمييز الإسناد ======
 \newcommand{\isnad}[1]{\textbf{#1}}
 
 % ====== تمييز الراوي ======
-\newcommand{\rawi}[1]{\textcolor{blue}{#1}}
+\renewcommand{\rawi}[1]{%
+    \textcolor{blue}{#1}\index[alam]{#1}%
+}
 
 \usepackage{xcolor}
 \usepackage{tcolorbox}
@@ -70,6 +112,7 @@
 }
 
 % ====== الروابط والفهرس ======
+\usepackage[nottoc]{tocbibind} % تضمين الملاحق والقوائم في الفهرس تلقائياً
 \usepackage[colorlinks=true, linkcolor=blue, urlcolor=blue, citecolor=blue]{hyperref}
 
 % ====== بيانات الغلاف ======
@@ -80,7 +123,8 @@
 % ====== بداية المستند ======
 \begin{document}
 
-\frontmatter % ترقيم أبجدي (أ، ب، ج) للغلاف والفهرس
+\frontmatter % بداية الأجزاء التمهيدية (الغلاف والفهرس)
+\pagenumbering{arabic} % استخدام الأرقام العربية لترقيم الصفحات التمهيدية
 \maketitle % توليد صفحة الغلاف
 
 \tableofcontents % توليد الفهرس
@@ -91,6 +135,22 @@
 % استدعاء ملفات الدروس من مجلد src
 % يتم تجميع الكتاب هنا ليكون منظماً وسهل التعديل
 \input{src/001.tex}
-%\input{src/002.tex} % سيتم تفعيل هذا السطر وإزالة علامة % عند البدء في الدرس الثاني
+\input{src/002.tex}
+\input{src/003.tex}
+\input{src/004.tex}
+\input{src/005.tex}
+\input{src/006.tex}
+\input{src/007.tex}
+
+% ====== الملاحق ======
+% إعادة تعريف ترويسة الصفحات للملاحق
+\cleardoublepage % ضمان بدء الملاحق على صفحة جديدة وتطبيق التنسيق الصحيح
+\fancyhead[RO]{\nouppercase{\appendixname}} % تغيير الترويسة اليمنى لتظهر كلمة "ملحق"
+
+\input{src/appendices.tex}
+
+\printindex[ayah]
+\printindex[hadith]
+\printindex[alam]
 
 \end{document}
